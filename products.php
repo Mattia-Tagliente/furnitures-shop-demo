@@ -20,6 +20,8 @@
         INNER JOIN furniture_price ON  furniture_price.furniture_id = furniture.furniture_id
         WHERE furniture_price.end_date IS null"
         ;
+
+        //A random comment for practicing GIT commits
     
         $SelectPicturesResult = $conn->query($selectFurnitureQuery);
 
