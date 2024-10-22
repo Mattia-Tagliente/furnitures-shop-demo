@@ -1,0 +1,40 @@
+COSA DEVE ESSERE MOSTRATO DEI MOBILI:
+
+- un'immagine
+- nome del mobile 
+- il prezzo
+- il voto medio delle recensioni 
+
+TABELLE DEL DATABASE:
+
+- furniture_types
+type_id (primar key)
+type_name (unique)
+
+- furnitures 
+furniture_id
+furniture_name (unique)
+furniture_description
+price
+
+
+- furniture_reviews
+user_id
+furniture
+vote 
+
+- users
+user_id 
+username
+password
+gender
+email 
+birth_date
+
+
+- orders
+user_id
+furniture_id
+order_date
+
+
