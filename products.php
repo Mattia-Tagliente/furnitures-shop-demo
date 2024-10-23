@@ -18,11 +18,32 @@
         INNER JOIN furniture ON furniture_picture.furniture_id = furniture.furniture_id
         INNER JOIN furniture_type ON furniture_type.type_id = furniture.furniture_type
         INNER JOIN furniture_price ON  furniture_price.furniture_id = furniture.furniture_id
-        WHERE furniture_price.end_date IS null"
+        WHERE furniture_price.end_date IS null
+        LIMIT 3"
         ;
-
-        //A random comment for practicing GIT commits
     
+
+        // Per mostrare solo due o n prodotti per pagina:
+
+        // innanzitutto vediamo quante pagine avremo in base al numero totale dei prodotti restituiti dalla query
+        // crieamo un array contenente il numero delle pagine che ha solo all'inizio il numero 1
+        // prendere il numero totale degli items
+        // se il numero totale dei prodotti è maggiore al limite per pagina: 
+        // ciclo while (condizione: numero delle pagine > 0)
+        // in cui ad ogni iterazione totale prodotti - numero prodotti per pagina,
+        //  numero della pagina += 1
+        //  numero prodotti -= numero prodotti per pagina
+
+        // se la dimensione dell'array delle pagine è maggiore:
+        // stampare i numeri delle pagine sotto 
+        // se la variabile pagina non è null --- > (ad esempio è 1, vedere sotto)
+        // limit della query da (limite per pagina * numero della pagina + 1), prendere 2
+        // ciclo for (per il numero di pagine nell'array)
+        // stampa un link con numero della pagina, sia come testo che nella variabile pagina dell'href ad ogni iterazione
+
+        // altrimenti, se la dimensione dell'array è solo 1 di uno, semplicemente stampare i prodotti
+        // senza particolari seghe mentali
+
         $SelectPicturesResult = $conn->query($selectFurnitureQuery);
 
         while ($fetchRow = $SelectPicturesResult->fetch_array()){
