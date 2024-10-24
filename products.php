@@ -11,9 +11,12 @@
 <body>
     <?php
         
-        $maxProductsPerPage = 4;
+        //This constant sets the number of products that can be displayed in a page
+        $MAX_PRODUCTS_PER_PAGE = 4;
+        //This array will store the page IDs according to the total amount of products
         $productPages = [];
 
+        //This query returns the total amount of products from the database 
         $NumberFurnitureQuery = "SELECT COUNT(*) AS number_products
         FROM furniture_picture 
         INNER JOIN furniture ON furniture_picture.furniture_id = furniture.furniture_id
@@ -22,16 +25,22 @@
         WHERE furniture_price.end_date IS null
         "
         ;
-
+        //Fetch of the result of the previous query
         $numberProductsResult = $conn->query($NumberFurnitureQuery);
         $fetchNumberProducts =  $numberProductsResult ->fetch_array();
         $numberProducts = $fetchNumberProducts['number_products'];
             
 
-            //number of the page
+            //This GET call returns the current number of the page  
             $pageNumber = $_GET["p"];
-            $offset = ($pageNumber - 1) * $maxProductsPerPage;
+            //this variable sets an offset for the LIMIT of the query that returns the products in a page
+            //For example: the max amount of products that can be displayed is 4.
+            //Assuming there are 12  products, the first page shows the first four products,
+            //while the second one shows the products from fith eighth
+            //and the third page shows the products from nineth tto welfth 
+            $offset = ($pageNumber - 1) * $MAX_PRODUCTS_PER_PAGE;
 
+            //The query by default selects the furnitures with an offset
             $selectFurnitureQuery = "SELECT furniture.furniture_name, furniture_type.type_name, 
                 furniture_picture.picture_path, furniture_price.price
                 FROM furniture_picture 
@@ -39,8 +48,9 @@
                 INNER JOIN furniture_type ON furniture_type.type_id = furniture.furniture_type
                 INNER JOIN furniture_price ON  furniture_price.furniture_id = furniture.furniture_id
                 WHERE furniture_price.end_date IS null
-                LIMIT $offset, $maxProductsPerPage";
-
+                LIMIT $offset, $MAX_PRODUCTS_PER_PAGE";
+            //If the page number is null the current page will result as the first one,
+            //in this case there is no need for a offset.
             if ($pageNumber == null){
             $selectFurnitureQuery = "SELECT furniture.furniture_name, furniture_type.type_name, 
                 furniture_picture.picture_path, furniture_price.price
@@ -49,13 +59,15 @@
                 INNER JOIN furniture_type ON furniture_type.type_id = furniture.furniture_type
                 INNER JOIN furniture_price ON  furniture_price.furniture_id = furniture.furniture_id
                 WHERE furniture_price.end_date IS null
-                LIMIT $maxProductsPerPage";
+                LIMIT $MAX_PRODUCTS_PER_PAGE";
             }                
 
-$SelectPicturesResult = $conn->query($selectFurnitureQuery);
+//Fetch of the previous query
+$SelectFornituresResult = $conn->query($selectFurnitureQuery);
 
+//Table that shows the furnitures data
 echo "<table>";
-while ($fetchRow = $SelectPicturesResult->fetch_array()){
+while ($fetchRow = $SelectFornituresResult->fetch_array()){
 
     $picturePath = $fetchRow['picture_path'];
     $furnitureName =$fetchRow['furniture_name'];
@@ -92,14 +104,15 @@ while ($fetchRow = $SelectPicturesResult->fetch_array()){
 }
 echo "</table><br>";
 
-//This cycle populates the array with the number of pages based on the number of products
-if ($numberProducts > $maxProductsPerPage){
+//These cycles populate the array with the number of pages based on the total amount of products
+//and print the related links when the amount of products is more than the max number that can be displayed 
+if ($numberProducts > $MAX_PRODUCTS_PER_PAGE){
     while ($numberProducts > 0){
-        $numberProducts -= $maxProductsPerPage;
+        $numberProducts -= $MAX_PRODUCTS_PER_PAGE;
         $nextPage = end($productPages) + 1;
         $productPages[] = $nextPage;
     }
-
+    
     for ($i = 0; $i < count($productPages); $i++){
         $pageIndex = $productPages[$i];
         if ($pageIndex == 1){
