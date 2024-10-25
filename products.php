@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <?php 
-        include("./connection/conn.php");
+        include("./connection/conn.php");        
     ?>
+    <link rel="stylesheet" type="text/css" href="./resources/css/products.css">
 </head>
 <body>
     <?php
@@ -83,10 +84,11 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
     <td class='furniture'>
     <img class='furn-picture' src=$picturePath width='200px' height='200px'> 
     <div class='furniture-description'>
-    <p class0'furn-data type'>Type:$furnitureType </p>
+    <p class= 'furn-data type'>Type:$furnitureType </p>
     <p class='furn-data name'>Name:$furnitureName </p>
+    <div class='furn-price-rating-wrapper'
     <p class='furn-data price'>Price:$furniturePrice</p>
-    </div>
+    
     ";
 
     $ratingString = "";
@@ -95,7 +97,9 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
         $ratingString = $ratingString."*";
     }
     
-    echo "<p>Rating:$ratingString</p>
+    echo "<p class='furn-data rating'>Rating:$ratingString</p>
+    </div>
+    </div>
     <td>"
     ;
 }
