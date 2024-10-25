@@ -1,0 +1,25 @@
+*{
+    border: 1px solid black;
+}
+
+table{
+    display: flex;
+    justify-content: center;
+}
+
+.furn-data{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.furniture-description{
+    display: flex;
+    flex-direction: column;
+}
+
+.furn-price-rating-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5%;
+}
