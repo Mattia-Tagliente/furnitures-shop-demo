@@ -84,10 +84,10 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
     <td class='furniture'>
     <img class='furn-picture' src=$picturePath width='200px' height='200px'> 
     <div class='furniture-description'>
-    <p class= 'furn-data type'>Type:$furnitureType </p>
-    <p class='furn-data name'>Name:$furnitureName </p>
-    <div class='furn-price-rating-wrapper'
-    <p class='furn-data price'>Price:$furniturePrice</p>
+    <p class= 'furn-data type'>".strtoupper($furnitureType)."</p>
+    <p class='furn-data name'>$furnitureName </p>
+    <div class='furn-price-rating-wrapper'>
+    <p class='furn-data price'>$furniturePrice</p>
     
     ";
 
@@ -97,7 +97,7 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
         $ratingString = $ratingString."*";
     }
     
-    echo "<p class='furn-data rating'>Rating:$ratingString</p>
+    echo "<p class='furn-data rating'>$ratingString</p>
     </div>
     </div>
     <td>"
