@@ -1,16 +1,26 @@
-/* *{
+*{
     border: 1px solid black;
+}
+
+/*tr{
+    display: flex;
+    justify-content: space-around;
 }*/
 
 table{
+    width: 100%;
+}
+
+tr{
     display: flex;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: center;
 }
 
 /*To refactor later*/
 .furniture{
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 .furn-data{
