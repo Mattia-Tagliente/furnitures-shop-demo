@@ -32,7 +32,10 @@
             
 
             //This GET call returns the current number of the page  
-            $pageNumber = $_GET["p"];
+            $pageNumber = null;
+            if (isset($_GET["p"])){
+                $pageNumber = $_GET["p"];
+            }
             //this variable sets an offset for the LIMIT of the query that returns the products in a page
             //For example: the max amount of products that can be displayed is 4.
             //Assuming there are 12  products, the first page shows the first four products,
