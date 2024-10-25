@@ -80,11 +80,13 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
     $furnitureRating = ceil($fetchRating['rating_vote']);
 
     echo "
-    <td>
-    <img src=$picturePath width='200px' height='200px'> 
-    <p>Type:$furnitureType </p>
-    <p>Name:$furnitureName </p>
-    <p>Price:$furniturePrice</p>
+    <td class='furniture'>
+    <img class='furn-picture' src=$picturePath width='200px' height='200px'> 
+    <div class='furniture-description'>
+    <p class0'furn-data type'>Type:$furnitureType </p>
+    <p class='furn-data name'>Name:$furnitureName </p>
+    <p class='furn-data price'>Price:$furniturePrice</p>
+    </div>
     ";
 
     $ratingString = "";
