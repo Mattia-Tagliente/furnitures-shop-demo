@@ -1,6 +1,6 @@
-*{
+/* *{
     border: 1px solid black;
-}
+}*/
 
 table{
     display: flex;
@@ -22,4 +22,16 @@ table{
     justify-content: space-between;
     align-items: center;
     margin-top: 5%;
+}
+
+.furn-data.type{
+    color: grey;
+}
+
+.furn-data.name{
+    font-weight: bold;
+}
+
+.furn-data.price{
+    color: green;
 }
