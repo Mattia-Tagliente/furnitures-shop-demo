@@ -15,15 +15,16 @@
         $MAX_PRODUCTS_PER_PAGE = 4;
         //This array will store the page IDs according to the total amount of products
         $productPages = [];
-
-        //This query returns the total amount of products from the database 
-        $NumberFurnitureQuery = "SELECT COUNT(*) AS number_products
-        FROM furniture_picture 
+        $furnituresFromJoinWhere = "FROM furniture_picture 
         INNER JOIN furniture ON furniture_picture.furniture_id = furniture.furniture_id
         INNER JOIN furniture_type ON furniture_type.type_id = furniture.furniture_type
         INNER JOIN furniture_price ON  furniture_price.furniture_id = furniture.furniture_id
         WHERE furniture_price.end_date IS null
         "
+        ;
+
+        //This query returns the total amount of products from the database 
+        $NumberFurnitureQuery = "SELECT COUNT(*) AS number_products ".$furnituresFromJoinWhere;
         ;
         //Fetch of the result of the previous query
         $numberProductsResult = $conn->query($NumberFurnitureQuery);
@@ -45,23 +46,14 @@
 
             //The query by default selects the furnitures with an offset
             $selectFurnitureQuery = "SELECT furniture.furniture_name, furniture_type.type_name, 
-                furniture_picture.picture_path, furniture_price.price
-                FROM furniture_picture 
-                INNER JOIN furniture ON furniture_picture.furniture_id = furniture.furniture_id
-                INNER JOIN furniture_type ON furniture_type.type_id = furniture.furniture_type
-                INNER JOIN furniture_price ON  furniture_price.furniture_id = furniture.furniture_id
-                WHERE furniture_price.end_date IS null
-                LIMIT $offset, $MAX_PRODUCTS_PER_PAGE";
+                furniture_picture.picture_path, furniture_price.price ".$furnituresFromJoinWhere."
+                    LIMIT $offset, $MAX_PRODUCTS_PER_PAGE";
+
             //If the page number is null the current page will result as the first one,
             //in this case there is no need for a offset.
             if ($pageNumber == null){
             $selectFurnitureQuery = "SELECT furniture.furniture_name, furniture_type.type_name, 
-                furniture_picture.picture_path, furniture_price.price
-                FROM furniture_picture 
-                INNER JOIN furniture ON furniture_picture.furniture_id = furniture.furniture_id
-                INNER JOIN furniture_type ON furniture_type.type_id = furniture.furniture_type
-                INNER JOIN furniture_price ON  furniture_price.furniture_id = furniture.furniture_id
-                WHERE furniture_price.end_date IS null
+                furniture_picture.picture_path, furniture_price.price ". $furnituresFromJoinWhere."
                 LIMIT $MAX_PRODUCTS_PER_PAGE";
             }                
 
