@@ -85,7 +85,7 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
     <img class='furn-picture' src=$picturePath width='200px' height='200px'> 
     <div class='furniture-description'>
     <p class= 'furn-data type'>".strtoupper($furnitureType)."</p>
-    <p class='furn-data name'>$furnitureName </p>
+    <p class='furn-data name'>".ucwords($furnitureName)."</p>
     <div class='furn-price-rating-wrapper'>
     <p class='furn-data price'>$furniturePrice</p>
     
