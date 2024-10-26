@@ -62,7 +62,7 @@
 $SelectFornituresResult = $conn->query($selectFurnitureQuery);
 
 //Table that shows the furnitures data
-echo "<table>";
+echo "<div class='furnitures-container'>";
 while ($fetchRow = $SelectFornituresResult->fetch_array()){
 
     $picturePath = $fetchRow['picture_path'];
@@ -81,7 +81,7 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
     $furnitureRating = ceil($fetchRating['rating_vote']);
 
     echo "
-    <td class='furniture'>
+    <div class='furniture'>
     <img class='furn-picture' src=$picturePath width='200px' height='200px'> 
     <div class='furniture-description'>
     <p class= 'furn-data type'>".strtoupper($furnitureType)."</p>
@@ -100,10 +100,10 @@ while ($fetchRow = $SelectFornituresResult->fetch_array()){
     echo "<p class='furn-data rating'>$ratingString</p>
     </div>
     </div>
-    <td>"
+    </div>"
     ;
 }
-echo "</table><br>";
+echo "</div><br>";
 
 //These cycles populate the array with the number of pages based on the total amount of products
 //and print the related links when the amount of products is more than the max number that can be displayed 

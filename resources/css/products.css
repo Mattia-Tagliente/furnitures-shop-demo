@@ -2,22 +2,13 @@
     border: 1px solid black;
 }
 
-/*tr{
-    display: flex;
-    justify-content: space-around;
-}*/
 
-table{
+.furnitures-container{
+    display: flex;
     width: 100%;
 }
 
-tr{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
 
-/*To refactor later*/
 .furniture{
     padding-left: 1%;
     padding-right: 1%;
