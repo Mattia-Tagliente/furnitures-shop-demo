@@ -7,7 +7,17 @@
     <?php 
         include("./connection/conn.php");        
     ?>
-    <link rel="stylesheet" type="text/css" href="./resources/css/products.css">
+    <!--
+    Sometimes there may be the need of Cache Busting  when the browser keeps the older version of a CSS file
+    in its cache, not allowing changes in the stylesheet to be displayed.  
+    This is a typical line in the head section to set the stylesheet:
+    <link rel='stylesheet' type='text/css' href='/style.css'/>
+    Below there is an alternative line that fixes the problem by using the function filemtime()
+    to attach a timestamp of the creation of the CSS file to the end of the stylesheet link.
+    This tricks the browsers into thinking something is new so it’ll reload the CSS file 
+    with the new changes and caches it until the next change.
+    -->
+    <link rel='stylesheet' type='text/css'  href='./resources/css/products.css?<?php echo filemtime("./resources/css/products.css"); ?>' />
 </head>
 <body>
     <?php
@@ -41,8 +51,8 @@
             //this variable sets an offset for the LIMIT of the query that returns the products in a page
             //For example: the max amount of products that can be displayed is 4.
             //Assuming there are 12  products, the first page shows the first four products,
-            //while the second one shows the products from fith eighth
-            //and the third page shows the products from nineth tto welfth 
+            //while the second one shows the products from fith to eighth
+            //and the third page shows the products from nineth to twelfth 
             $offset = ($pageNumber - 1) * $MAX_PRODUCTS_PER_PAGE;
 
             //The query by default selects the furnitures with an offset
